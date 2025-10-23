@@ -12,8 +12,41 @@
         <pubDate>Sat, 11 Oct 2025 23:06:17 +0200</pubDate>
         
         <guid>https://serjaii.github.io/Codigo-html-de-mi-pagina/post/my-first-post/</guid>
-        <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction
-&lt;/h2&gt;&lt;p&gt;This is &lt;strong&gt;bold&lt;/strong&gt; text, and this is &lt;em&gt;emphasized&lt;/em&gt; text.&lt;/p&gt;
+        <description>&lt;img src="https://serjaii.github.io/Codigo-html-de-mi-pagina/cover.jpg" alt="Featured image of post Mi Primer Post" /&gt;&lt;h2 id=&#34;bienvenidos-a-mi-blog&#34;&gt;¡Bienvenidos a mi Blog!
+&lt;/h2&gt;&lt;p&gt;Este es mi espacio personal donde compartiré mis experiencias y conocimientos sobre desarrollo de software, inteligencia artificial y tecnología en general.&lt;/p&gt;
+&lt;h3 id=&#34;qué-encontrarás-aquí&#34;&gt;¿Qué encontrarás aquí?
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;Tutoriales y guías prácticas&lt;/li&gt;
+&lt;li&gt;Proyectos personales&lt;/li&gt;
+&lt;li&gt;Reflexiones sobre tecnología&lt;/li&gt;
+&lt;li&gt;Tips y mejores prácticas&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;código-de-ejemplo&#34;&gt;Código de ejemplo
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;saludar&lt;/span&gt;():
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;¡Bienvenidos a mi blog!&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;saludar()
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;markdown-y-formato&#34;&gt;Markdown y Formato
+&lt;/h3&gt;&lt;p&gt;Aquí hay algunos ejemplos de formato en Markdown:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Texto en negrita&lt;/strong&gt; para énfasis&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Texto en cursiva&lt;/em&gt; para sutileza&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Código inline&lt;/code&gt; para comandos o variables&lt;/li&gt;
+&lt;li&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Blockquotes para citas o destacados&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;próximamente&#34;&gt;Próximamente
+&lt;/h3&gt;&lt;p&gt;Estaré publicando contenido regularmente sobre:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Desarrollo Web&lt;/li&gt;
+&lt;li&gt;Inteligencia Artificial&lt;/li&gt;
+&lt;li&gt;Machine Learning&lt;/li&gt;
+&lt;li&gt;Tips de Programación&lt;/li&gt;
+&lt;li&gt;Proyectos Open Source&lt;/li&gt;
+&lt;/ol&gt;
 </description>
         </item>
         

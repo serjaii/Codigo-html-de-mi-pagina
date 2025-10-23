@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>Serj AI</title>
-        <link>https://serjaii.github.io/Codigo-html-de-mi-pagina/</link>
-        <description>Recent content on Serj AI</description>
+        <title>Blog on Serj AI</title>
+        <link>https://serjaii.github.io/Codigo-html-de-mi-pagina/tags/blog/</link>
+        <description>Recent content in Blog on Serj AI</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>es-es</language>
-        <lastBuildDate>Sat, 11 Oct 2025 23:06:17 +0200</lastBuildDate><atom:link href="https://serjaii.github.io/Codigo-html-de-mi-pagina/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 11 Oct 2025 23:06:17 +0200</lastBuildDate><atom:link href="https://serjaii.github.io/Codigo-html-de-mi-pagina/tags/blog/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Mi Primer Post</title>
         <link>https://serjaii.github.io/Codigo-html-de-mi-pagina/post/my-first-post/</link>
         <pubDate>Sat, 11 Oct 2025 23:06:17 +0200</pubDate>
@@ -47,30 +47,6 @@
 &lt;li&gt;Tips de Programación&lt;/li&gt;
 &lt;li&gt;Proyectos Open Source&lt;/li&gt;
 &lt;/ol&gt;
-</description>
-        </item>
-        <item>
-        <title>Sobre Mi</title>
-        <link>https://serjaii.github.io/Codigo-html-de-mi-pagina/about/</link>
-        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-        
-        <guid>https://serjaii.github.io/Codigo-html-de-mi-pagina/about/</guid>
-        <description>&lt;p&gt;¡Hola! Soy un desarrollador apasionado por la tecnología, la inteligencia artificial y la creación de soluciones innovadoras.&lt;/p&gt;
-&lt;h2 id=&#34;mis-intereses&#34;&gt;Mis Intereses
-&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;Desarrollo de Software&lt;/li&gt;
-&lt;li&gt;Inteligencia Artificial&lt;/li&gt;
-&lt;li&gt;Machine Learning&lt;/li&gt;
-&lt;li&gt;Tecnologías Web&lt;/li&gt;
-&lt;li&gt;Open Source&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;contacto&#34;&gt;Contacto
-&lt;/h2&gt;&lt;p&gt;¿Tienes alguna pregunta o propuesta? No dudes en contactarme a través de:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;GitHub: &lt;a class=&#34;link&#34; href=&#34;https://github.com/serjaii&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;@serjaii&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;LinkedIn: &lt;a class=&#34;link&#34; href=&#34;&#34; &gt;Tu perfil&lt;/a&gt; &lt;!-- raw HTML omitted --&gt;&lt;/li&gt;
-&lt;/ul&gt;
 </description>
         </item>
         
