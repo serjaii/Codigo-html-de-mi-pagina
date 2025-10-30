@@ -2,40 +2,26 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://serjaii.github.io/Codigo-html-de-mi-pagina/tags/acl/</loc>
-    <lastmod>2025-10-11T23:06:17+02:00</lastmod>
-  </url><url>
-    <loc>https://serjaii.github.io/Codigo-html-de-mi-pagina/categories/</loc>
-    <lastmod>2025-10-11T23:06:17+02:00</lastmod>
-  </url><url>
-    <loc>https://serjaii.github.io/Codigo-html-de-mi-pagina/tags/dhcp/</loc>
-    <lastmod>2025-10-11T23:06:17+02:00</lastmod>
-  </url><url>
-    <loc>https://serjaii.github.io/Codigo-html-de-mi-pagina/post/my-first-post/</loc>
-    <lastmod>2025-10-11T23:06:17+02:00</lastmod>
-  </url><url>
     <loc>https://serjaii.github.io/Codigo-html-de-mi-pagina/post/</loc>
-    <lastmod>2025-10-11T23:06:17+02:00</lastmod>
+    <lastmod>2025-10-30T12:28:17+02:00</lastmod>
   </url><url>
-    <loc>https://serjaii.github.io/Codigo-html-de-mi-pagina/categories/pr%C3%A1ctica/</loc>
-    <lastmod>2025-10-11T23:06:17+02:00</lastmod>
-  </url><url>
-    <loc>https://serjaii.github.io/Codigo-html-de-mi-pagina/tags/redes/</loc>
-    <lastmod>2025-10-11T23:06:17+02:00</lastmod>
-  </url><url>
-    <loc>https://serjaii.github.io/Codigo-html-de-mi-pagina/categories/redes/</loc>
-    <lastmod>2025-10-11T23:06:17+02:00</lastmod>
+    <loc>https://serjaii.github.io/Codigo-html-de-mi-pagina/post/prueba/</loc>
+    <lastmod>2025-10-30T12:28:17+02:00</lastmod>
   </url><url>
     <loc>https://serjaii.github.io/Codigo-html-de-mi-pagina/</loc>
-    <lastmod>2025-10-11T23:06:17+02:00</lastmod>
+    <lastmod>2025-10-30T12:28:17+02:00</lastmod>
   </url><url>
-    <loc>https://serjaii.github.io/Codigo-html-de-mi-pagina/tags/</loc>
+    <loc>https://serjaii.github.io/Codigo-html-de-mi-pagina/post/my-first-post/</loc>
     <lastmod>2025-10-11T23:06:17+02:00</lastmod>
   </url><url>
     <loc>https://serjaii.github.io/Codigo-html-de-mi-pagina/archives/</loc>
   </url><url>
     <loc>https://serjaii.github.io/Codigo-html-de-mi-pagina/search/</loc>
   </url><url>
+    <loc>https://serjaii.github.io/Codigo-html-de-mi-pagina/categories/</loc>
+  </url><url>
     <loc>https://serjaii.github.io/Codigo-html-de-mi-pagina/about/</loc>
+  </url><url>
+    <loc>https://serjaii.github.io/Codigo-html-de-mi-pagina/tags/</loc>
   </url>
 </urlset>

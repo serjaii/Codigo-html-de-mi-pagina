@@ -6,125 +6,22 @@
         <description>Recent content on SerjAi</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>es-es</language>
-        <lastBuildDate>Sat, 11 Oct 2025 23:06:17 +0200</lastBuildDate><atom:link href="https://serjaii.github.io/Codigo-html-de-mi-pagina/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 30 Oct 2025 12:28:17 +0200</lastBuildDate><atom:link href="https://serjaii.github.io/Codigo-html-de-mi-pagina/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Prueba: Introduccion a la implantacion de aplicaciones web</title>
+        <link>https://serjaii.github.io/Codigo-html-de-mi-pagina/post/prueba/</link>
+        <pubDate>Thu, 30 Oct 2025 12:28:17 +0200</pubDate>
+        
+        <guid>https://serjaii.github.io/Codigo-html-de-mi-pagina/post/prueba/</guid>
+        <description>&lt;img src="https://serjaii.github.io/Codigo-html-de-mi-pagina/static/img/mi-logo.jpg" alt="Featured image of post Prueba: Introduccion a la implantacion de aplicaciones web" /&gt;&lt;h1 id=&#34;sergio-jimenez-suarez-30-10-2025&#34;&gt;Sergio Jimenez Suarez 30-10-2025
+&lt;/h1&gt;</description>
+        </item>
+        <item>
         <title>Hunger Games</title>
         <link>https://serjaii.github.io/Codigo-html-de-mi-pagina/post/my-first-post/</link>
         <pubDate>Sat, 11 Oct 2025 23:06:17 +0200</pubDate>
         
         <guid>https://serjaii.github.io/Codigo-html-de-mi-pagina/post/my-first-post/</guid>
-        <description>&lt;img src="https://serjaii.github.io/Codigo-html-de-mi-pagina/cover.jpg" alt="Featured image of post Hunger Games" /&gt;&lt;h1 id=&#34;hunger-games&#34;&gt;Hunger Games
-&lt;/h1&gt;&lt;p&gt;Vas a participar en The Hunger Games, un juego de alianzas donde el objetivo es sobrevivir. El mundo se divide en distritos, numerados del 1 al 12 del más rico al más pobre. También se rumorea la existencia de un distrito 13, pero nadie está muy seguro de su existencia. En este momento solo quedan representantes de cuatro distritos.
-El escenario del juego incluye todos los distritos anteriores y el distrito secreto, al que al principio nadie sabe llegar.&lt;/p&gt;
-&lt;h3 id=&#34;ejercicio-1-realizar-la-configuración-de-la-red&#34;&gt;Ejercicio 1: Realizar la configuración de la red
-&lt;/h3&gt;&lt;p&gt;Realizar la configuración de la red que sea necesaria para que todos los participantes puedan comunicarse entre sí por la ruta más corta posible. Documenta el proceso y demuestra su funcionamiento.
-Para permitir la comunicación de todas los participantes en primer lugar le asignaremos direcciones ip tanto a estos como a las interfaces de los routers en el camino.&lt;/p&gt;
-&lt;p&gt;Marvel: 10.0.1.2 /24
-Glimmer: 10.0.1.3 /24
-Cato: 10.0.2.2 /24
-Clover: 10.0.2.3 /24
-Thresh: 10.0.11.2 /24
-Rue: 10.0.11.3 /24
-Peeta: 10.0.12.2 /24
-Katniss: 10.0.12.3 /24&lt;/p&gt;
-&lt;p&gt;R1 f0/0: 10.0.1.1 /24
-R1 f0/1: 172.23.0.1 /24
-R1 f1/0: 192.168.1.2 /24
-R2 f0/0: 10.0.11.1 /24
-R2 f0/1: 172.23.0.2 /24
-R2 f1/0: 172.24.0.1 /24
-R2 f1/1: 192.168.11.2 /24
-R3 f0/0: 10.0.2.1 /24
-R3 f0/1: 172.25.0.1 /24
-R3 f1/0: 192.168.2.2 /24
-R4 f0/0: 10.0.12.1 /24
-R4 f0/1: 172.24.0.2 /24
-R4 f1/0: 192.168.12.2 /24
-R4 f1/1: 172.25.0.2 /24
-R5 f0/0: 192.168.11.1 /24
-R5 f0/1: 192.168.12.1 /24
-R5 f1/0: 192.168.1.1 /24
-R5 f1/1: 192.168.2.1 /24
-R5 f2/0: 10.0.13.1 /24&lt;/p&gt;
-&lt;p&gt;Una vez asignadas las ip pasaremos con el direccionamiento de los routers.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;R1:
-Si el distrito 1 quiere comunicar con el distrito 11 el tráfico irá a R2, en el resto de casos saldrá por la salida por defecto hacia R5.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;R2:
-Como el Distrito 13 es aún desconocido por los participantes ignoraremos su presencia a la hora de hacer el enrutamiento; esto nos ahorrará momentáneamente una línea a la tabla. La comunicación para el distrito 1 saldrá hacia R1 y la salida por defecto será hacia R4.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;R3:
-Similar a R1, salida por defecto camino a R5, excepto mensajes para el distrito 12 que saldrán hasta R4.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;R4:
-Similar a R2, los mensajes a distrito 2 viajarán a R3, el resto hasta R2.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;R5:
-En este caso sí deberemos especificar las rutas hacia cada distrito; la salida por defecto la dejaré mirando hacia el distrito 13 pensando a futuro, pues en cualquier caso no nos va a ahorrar líneas a la tabla de enrutamiento.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Comprobación de ping entre distritos desde Distrito 1:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Distrito 2&lt;/li&gt;
-&lt;li&gt;Distrito 11&lt;/li&gt;
-&lt;li&gt;Distrito 12&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;ejercicio-2-establecer-las-acl-necesarias&#34;&gt;Ejercicio 2: Establecer las ACL necesarias
-&lt;/h3&gt;&lt;p&gt;Establecer las ACL necesarias para reflejar la situación descrita. Documenta el proceso y demuestra su funcionamiento.&lt;/p&gt;
-&lt;p&gt;A medida que avanza el juego se van modificando las alianzas y, por tanto, algunos participantes pasan a ser enemigos y dejan de tener comunicación entre ellos. Así, el segundo día la situación es la siguiente:&lt;/p&gt;
-&lt;p&gt;• Los superpijos se han peleado con todos y no se comunican con el resto de distritos, cuyos mensajes no quieren escuchar.&lt;/p&gt;
-&lt;p&gt;Para esta situación tenemos 2 opciones usando ACL:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;En el router de cada distrito bloquear el trafico con destino 10.0.1.0, requiere crear una ACL en R2, R3 y R4.&lt;/li&gt;
-&lt;li&gt;Cortar todo el trafico de R1 (opción elegida aquí): en mi opinión la más eficiente; el inconveniente es que los mensajes provenientes de los demás distritos recorren un mayor camino antes de ser desechados por R1.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Con esto he creado una ACL estándar en el router del distrito 1; todo el tráfico que intente salir desde la interfaz del switch será denegado.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Ping desde fuera hacia Distrito 1 (debería recibir administratively prohibited).&lt;/li&gt;
-&lt;li&gt;Ping desde Distrito 1 hacia fuera (timeout en la respuesta debido a la ACL en el camino de retorno).&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;• Los indigentes se comunican con los pobres, pero los demás distritos no quieren saber nada de ellos.&lt;/p&gt;
-&lt;p&gt;Crearemos una ACL extendida en la interfaz del switch de R4, para denegar todo el tráfico que se intente enviar a los distritos 1 y 2.&lt;/p&gt;
-&lt;p&gt;Comprobamos ping a cada distrito desde el 12.&lt;/p&gt;
-&lt;p&gt;• Los pobres y los pijos han establecido una alianza y pueden comunicarse aun entre ellos, aunque solo a través de R5.&lt;/p&gt;
-&lt;p&gt;Ahora deberemos modificar las tablas de enrutamiento de R2 y R4. Enviaremos el tráfico por defecto a R5; tendremos que añadir la ruta entre R2 y R4 manualmente.&lt;/p&gt;
-&lt;p&gt;No será necesario configurar ACL en este punto ya que toda comunicación entre Distritos 2 y 11 pasará por R5.&lt;/p&gt;
-&lt;h3 id=&#34;ejercicio-3-dhcp-para-los-superpijos&#34;&gt;Ejercicio 3: DHCP para los superpijos
-&lt;/h3&gt;&lt;p&gt;Al día siguiente, los superpijos deciden que es supercansado poner las direcciones IP a mano, así que tienes que montarles un servidor DHCP en el router de su red para que sus máquinas reciban automáticamente una dirección IP de las cinco primeras de su rango de direcciones, reservando la primera para el propio router.&lt;/p&gt;
-&lt;p&gt;Ejercicio 3: Configura el servidor DHCP de los superpijos. Documenta el proceso y demuestra su funcionamiento.&lt;/p&gt;
-&lt;p&gt;Excluimos la IP del router y las que no queremos que sean asignadas.&lt;/p&gt;
-&lt;p&gt;Ahora configuramos los parámetros del servidor DHCP (rango, gateway, DNS, lease).&lt;/p&gt;
-&lt;p&gt;Comprobamos su funcionamiento con un cliente dentro del distrito (dhcp request/lease).&lt;/p&gt;
-&lt;h3 id=&#34;ejercicio-4-acl-por-alianzas-individuales&#34;&gt;Ejercicio 4: ACL por alianzas individuales
-&lt;/h3&gt;&lt;p&gt;Configura las ACL (extendidas o no) que sean necesarias para representar este nuevo escenario. Documenta el proceso y demuestra su funcionamiento.&lt;/p&gt;
-&lt;p&gt;Cuando pasa una semana, las alianzas y enemistades ya no son solo entre distritos sino entre participantes individuales:&lt;/p&gt;
-&lt;p&gt;• Peeta establece una alianza con Cato y debe poder comunicarse con él.
-• Katniss deja de hablarse con Rue.
-• Katniss y Cato necesitan comunicarse entre ellos.&lt;/p&gt;
-&lt;p&gt;Como anteriormente se denegó todo el tráfico proveniente del Distrito 12 debemos reescribir dicha ACL, permitiendo las comunicaciones que se indican (ACL extendida).&lt;/p&gt;
-&lt;p&gt;Con esto:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Katniss solo puede comunicarse con Peeta, Cato y Thresh.&lt;/li&gt;
-&lt;li&gt;Peeta podrá comunicarse con Katniss, Cato y el Distrito 11.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Comprobaciones: pings y trazas entre los hosts mencionados.&lt;/p&gt;
-&lt;p&gt;• Cato y Thresh han acabado peleándose y ya no hay comunicación entre ellos. Denegamos la comunicación con una ACL extendida (se puede colocar en R2, R3 o R5).&lt;/p&gt;
-&lt;h3 id=&#34;ejercicio-5-servidor-web-en-el-distrito-13&#34;&gt;Ejercicio 5: Servidor web en el distrito 13
-&lt;/h3&gt;&lt;p&gt;Algunos participantes han descubierto el distrito 13. No parece haber habitantes, pero hay un servidor web con documentos útiles.&lt;/p&gt;
-&lt;p&gt;Ejercicio 5: Monta un servidor web en el distrito 13 que sea accesible mediante ACL extendidas solo para los participantes de los distritos 11 y 12 (puerto 80). Documenta y demuestra su funcionamiento.&lt;/p&gt;
-&lt;p&gt;Para montar el servidor sustituiremos la máquina VPCS por un Debian al que le instalaremos Apache y le daremos una IP estática.&lt;/p&gt;
-&lt;p&gt;Instalamos Apache2 y configuramos la IP estática; si habíamos usado una nube NAT temporal, la retiramos.&lt;/p&gt;
-&lt;p&gt;Probamos acceso desde distintos distritos para comprobar conectividad.&lt;/p&gt;
-&lt;p&gt;Modificamos la ACL en R4 para permitir acceso desde el distrito 12 hacia el servidor del distrito 13. Como las ACL se leen en orden, añadiremos la regla antes de &lt;code&gt;deny ip any any&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;Añadiremos también la regla correspondiente en R3/R5 para asegurar que solo 11 y 12 accedan al puerto 80.&lt;/p&gt;
-&lt;p&gt;Comprobación: acceso HTTP desde hosts en distritos 11 y 12; denegación desde otros distritos (ICMP no se ve afectado por la regla de puerto 80, por ello los pings pueden seguir siendo bloqueados o no según la ACL).&lt;/p&gt;
-&lt;p&gt;Para comprobar la funcionalidad web se puede añadir una máquina ligera con navegador en cada uno de los distritos 11 y 12 y verificar que se carga la página.&lt;/p&gt;
-&lt;p&gt;Fin del enunciado y pasos principales para documentar.&lt;/p&gt;
+        <description>&lt;img src="https://serjaii.github.io/Codigo-html-de-mi-pagina/static/img/mi-logo.jpg" alt="Featured image of post Hunger Games" /&gt;&lt;p&gt;#Sergio Jimenez Suarez 30-10-2025&lt;/p&gt;
 </description>
         </item>
         <item>
