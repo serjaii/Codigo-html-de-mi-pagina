@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>Posts on SerjAi</title>
-        <link>https://serjaii.github.io/Codigo-html-de-mi-pagina/post/</link>
-        <description>Recent content in Posts on SerjAi</description>
+        <title>Redes on SerjAi</title>
+        <link>https://serjaii.github.io/Codigo-html-de-mi-pagina/categories/redes/</link>
+        <description>Recent content in Redes on SerjAi</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>es-es</language>
-        <lastBuildDate>Sat, 11 Oct 2025 23:06:17 +0200</lastBuildDate><atom:link href="https://serjaii.github.io/Codigo-html-de-mi-pagina/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 11 Oct 2025 23:06:17 +0200</lastBuildDate><atom:link href="https://serjaii.github.io/Codigo-html-de-mi-pagina/categories/redes/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Hunger Games</title>
         <link>https://serjaii.github.io/Codigo-html-de-mi-pagina/post/my-first-post/</link>
         <pubDate>Sat, 11 Oct 2025 23:06:17 +0200</pubDate>
