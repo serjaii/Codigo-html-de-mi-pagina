@@ -1,0 +1,1413 @@
+<!DOCTYPE html>
+<html lang="es-es" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Ejercicio de configuración de red y ACL - Hunger Games">
+<title>Hunger Games</title>
+
+<link rel='canonical' href='https://serjaii.github.io/Serjaii/post/hunger-games/'>
+
+<link rel="stylesheet" href="/Serjaii/scss/style.min.3008fd7ff69018e7ed94d26c891a9b41d427dd0acb154b530ddafcf14985a901.css"><meta property='og:title' content="Hunger Games">
+<meta property='og:description' content="Ejercicio de configuración de red y ACL - Hunger Games">
+<meta property='og:url' content='https://serjaii.github.io/Serjaii/post/hunger-games/'>
+<meta property='og:site_name' content='SerjAii'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Redes' /><meta property='article:tag' content='ACL' /><meta property='article:tag' content='DHCP' /><meta property='article:tag' content='Cisco' /><meta property='article:published_time' content='2025-10-11T23:06:17&#43;02:00'/><meta property='article:modified_time' content='2025-10-11T23:06:17&#43;02:00'/><meta property='og:image' content='https://serjaii.github.io/Serjaii/post/hunger-games/cover.jpg' />
+<meta name="twitter:title" content="Hunger Games">
+<meta name="twitter:description" content="Ejercicio de configuración de red y ACL - Hunger Games"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://serjaii.github.io/Serjaii/post/hunger-games/cover.jpg' />
+    <link rel="shortcut icon" href="/Serjaii/img/mi-logo.jpg" />
+
+  
+
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/Serjaii/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/Serjaii/img/mi-logo_hu8266688819440592231.jpg" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🤖</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/Serjaii">SerjAii</a></h1>
+            <h2 class="site-description">Administración de sistemas informáticos en red</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/serjaii'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='mailto:sjnezsrez@gmail.com'
+                        target="_blank"
+                        title="Gmail"
+                        rel="me"
+                    >
+                        
+                        
+                            <?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg fill="#000000" width="800px" height="800px" viewBox="0 0 14 14" role="img" focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="m 13,3.25 0,7.5 c 0,0.425 -0.325,0.75 -0.75,0.75 l -0.75,0 0,-6.8065 L 7,7.925 2.5,4.6935 2.5,11.5 1.75,11.5 C 1.3245,11.5 1,11.175 1,10.75 L 1,3.25 C 1,3.0375 1.081,2.85 1.2155,2.716 1.35,2.58 1.538,2.5 1.75,2.5 L 2,2.5 7,6.125 12,2.5 l 0.25,0 c 0.2125,0 0.4,0.081 0.5345,0.216 C 12.9195,2.85 13,3.0375 13,3.25 Z"/></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://www.linkedin.com/in/serjaii/'
+                        target="_blank"
+                        title="LinkedIn"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-linkedin" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <rect x="4" y="4" width="16" height="16" rx="2" />
+  <line x1="8" y1="11" x2="8" y2="16" />
+  <line x1="8" y1="8" x2="8" y2="8.01" />
+  <line x1="12" y1="16" x2="12" y2="11" />
+  <path d="M16 16v-3a2 2 0 0 0 -4 0" />
+</svg>
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/Serjaii/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Inicio</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/Serjaii/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>Sobre Mi</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/Serjaii/proyectos/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Proyectos</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/Serjaii/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Buscar</span>
+            </a>
+        </li>
+        
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>Dark Mode</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+    <aside class="sidebar right-sidebar sticky">
+        
+                        
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#introducción">Introducción</a></li>
+    <li><a href="#contexto-del-escenario">Contexto del escenario</a></li>
+    <li><a href="#ejercicio-1-configuración-de-red">Ejercicio 1: Configuración de red</a>
+      <ul>
+        <li><a href="#direcciones-ip">Direcciones IP</a></li>
+        <li><a href="#direccionamiento-de-routers">Direccionamiento de routers</a></li>
+        <li><a href="#comprobación-de-conectividad">Comprobación de conectividad</a></li>
+      </ul>
+    </li>
+    <li><a href="#ejercicio-2-acl-según-alianzas">Ejercicio 2: ACL según alianzas</a>
+      <ul>
+        <li><a href="#opción-1">Opción 1</a></li>
+        <li><a href="#opción-2">Opción 2</a></li>
+      </ul>
+    </li>
+    <li><a href="#ejercicio-3-dhcp-para-los-superpijos">Ejercicio 3: DHCP para los superpijos</a>
+      <ul>
+        <li><a href="#pasos">Pasos:</a></li>
+      </ul>
+    </li>
+    <li><a href="#ejercicio-4-acl-por-relaciones-personales">Ejercicio 4: ACL por relaciones personales</a></li>
+    <li><a href="#ejercicio-5-servidor-web-del-distrito-13">Ejercicio 5: Servidor web del distrito 13</a>
+      <ul>
+        <li><a href="#pasos-1">Pasos:</a></li>
+        <li><a href="#comprobaciones">Comprobaciones:</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+        </div>
+    </section>
+
+                    
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/Serjaii/post/hunger-games/">
+                <img src="/Serjaii/post/hunger-games/cover_hu2575732174358677709.jpg"
+                        srcset="/Serjaii/post/hunger-games/cover_hu2575732174358677709.jpg 800w, /Serjaii/post/hunger-games/cover_hu5935384533464914841.jpg 1600w"
+                        width="800" 
+                        height="518" 
+                        loading="lazy"
+                        alt="Featured image of post Hunger Games" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/Serjaii/categories/redes/" >
+                Redes
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/Serjaii/post/hunger-games/">Hunger Games</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            Ejercicio de configuración de red y ACL - Hunger Games
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">11 Oct 2025</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    5 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="hunger-games">Hunger Games
+</h1><h2 id="introducción">Introducción
+</h2><p>Esta práctica simula un escenario de red complejo basado en la temática de <em>The Hunger Games</em>. A través de cinco ejercicios progresivos, implementaremos configuraciones de red avanzadas que incluyen enrutamiento estático, listas de control de acceso (ACL), servidor DHCP y un servidor web con restricciones de acceso.</p>
+<p>Los objetivos principales son:</p>
+<ul>
+<li>Configurar el enrutamiento entre múltiples distritos (redes)</li>
+<li>Implementar políticas de seguridad mediante ACL estándar y extendidas</li>
+<li>Automatizar la asignación de direcciones IP con DHCP</li>
+<li>Gestionar accesos a servicios web mediante filtrado por puerto</li>
+</ul>
+<p>Esta práctica permite aplicar conceptos fundamentales de redes en un contexto dinámico donde las alianzas (y por tanto, las políticas de acceso) cambian constantemente.</p>
+<hr>
+<h2 id="contexto-del-escenario">Contexto del escenario
+</h2><p>Vas a participar en <em>The Hunger Games</em>, un juego de alianzas donde el objetivo es sobrevivir.<br>
+El mundo se divide en distritos, numerados del 1 al 12 del más rico al más pobre.<br>
+También se rumorea la existencia de un distrito 13, pero nadie está muy seguro de su existencia.<br>
+En este momento solo quedan representantes de cuatro distritos.</p>
+<p>El escenario del juego incluye todos los distritos anteriores y el distrito secreto, al que al principio nadie sabe llegar.</p>
+<p><img src="/Serjaii/post/hunger-games/img-44.png"
+	width="1407"
+	height="692"
+	srcset="/Serjaii/post/hunger-games/img-44_hu15847676720979864025.png 480w, /Serjaii/post/hunger-games/img-44_hu7559946841574885185.png 1024w"
+	loading="lazy"
+	
+		alt="Topología de red - Hunger Games"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="203"
+		data-flex-basis="487px"
+	
+></p>
+<hr>
+<h2 id="ejercicio-1-configuración-de-red">Ejercicio 1: Configuración de red
+</h2><p>Realizar la configuración de la red que sea necesaria para que todos los participantes puedan comunicarse entre sí por la ruta más corta posible.<br>
+Documenta el proceso y demuestra su funcionamiento.</p>
+<p>Para permitir la comunicación de todos los participantes en primer lugar asignaremos direcciones IP tanto a estos como a las interfaces de los routers en el camino.</p>
+<h3 id="direcciones-ip">Direcciones IP
+</h3><p><strong>Participantes:</strong></p>
+<ul>
+<li>Marvel: 10.0.1.2 /24</li>
+<li>Glimmer: 10.0.1.3 /24</li>
+<li>Cato: 10.0.2.2 /24</li>
+<li>Clover: 10.0.2.3 /24</li>
+<li>Thresh: 10.0.11.2 /24</li>
+<li>Rue: 10.0.11.3 /24</li>
+<li>Peeta: 10.0.12.2 /24</li>
+<li>Katniss: 10.0.12.3 /24</li>
+</ul>
+<p><strong>Routers:</strong></p>
+<pre tabindex="0"><code>R1 f0/0: 10.0.1.1 /24
+R1 f0/1: 172.23.0.1 /24
+R1 f1/0: 192.168.1.2 /24
+
+R2 f0/0: 10.0.11.1 /24
+R2 f0/1: 172.23.0.2 /24
+R2 f1/0: 172.24.0.1 /24
+R2 f1/1: 192.168.11.2 /24
+
+R3 f0/0: 10.0.2.1 /24
+R3 f0/1: 172.25.0.1 /24
+R3 f1/0: 192.168.2.2 /24
+
+R4 f0/0: 10.0.12.1 /24
+R4 f0/1: 172.24.0.2 /24
+R4 f1/0: 192.168.12.2 /24
+R4 f1/1: 172.25.0.2 /24
+
+R5 f0/0: 192.168.11.1 /24
+R5 f0/1: 192.168.12.1 /24
+R5 f1/0: 192.168.1.1 /24
+R5 f1/1: 192.168.2.1 /24
+R5 f2/0: 10.0.13.1 /24
+</code></pre><h3 id="direccionamiento-de-routers">Direccionamiento de routers
+</h3><p><strong>R1:</strong><br>
+Si el distrito 1 quiere comunicar con el distrito 11 el tráfico irá a R2, en el resto de casos saldrá por la salida por defecto hacia R5.</p>
+<p><img src="/Serjaii/post/hunger-games/img-40.png"
+	width="484"
+	height="164"
+	srcset="/Serjaii/post/hunger-games/img-40_hu8470286134201251966.png 480w, /Serjaii/post/hunger-games/img-40_hu10327701759661850445.png 1024w"
+	loading="lazy"
+	
+		alt="Enrutamiento R1"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="295"
+		data-flex-basis="708px"
+	
+></p>
+<p><strong>R2:</strong><br>
+Ignoramos el distrito 13, la comunicación para el distrito 1 saldrá hacia R1 y la salida por defecto será hacia R4.</p>
+<p><img src="/Serjaii/post/hunger-games/img-06.png"
+	width="480"
+	height="302"
+	srcset="/Serjaii/post/hunger-games/img-06_hu7143905304999138645.png 480w, /Serjaii/post/hunger-games/img-06_hu15022677197974132287.png 1024w"
+	loading="lazy"
+	
+		alt="Enrutamiento R2"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="158"
+		data-flex-basis="381px"
+	
+></p>
+<p><strong>R3:</strong><br>
+Salida por defecto hacia R5, excepto mensajes para el distrito 12 que saldrán hasta R4.</p>
+<p><img src="/Serjaii/post/hunger-games/img-38.png"
+	width="483"
+	height="122"
+	srcset="/Serjaii/post/hunger-games/img-38_hu12892183173179351787.png 480w, /Serjaii/post/hunger-games/img-38_hu12652730655422460887.png 1024w"
+	loading="lazy"
+	
+		alt="Enrutamiento R3"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="395"
+		data-flex-basis="950px"
+	
+></p>
+<p><strong>R4:</strong><br>
+Mensajes al distrito 2 viajarán a R3, el resto hasta R2.</p>
+<p><img src="/Serjaii/post/hunger-games/img-37.png"
+	width="482"
+	height="238"
+	srcset="/Serjaii/post/hunger-games/img-37_hu4752279731969310164.png 480w, /Serjaii/post/hunger-games/img-37_hu4138887263333754482.png 1024w"
+	loading="lazy"
+	
+		alt="Enrutamiento R4"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="202"
+		data-flex-basis="486px"
+	
+></p>
+<p><strong>R5:</strong><br>
+Deberemos especificar rutas hacia cada distrito, salida por defecto hacia el distrito 13.</p>
+<p><img src="/Serjaii/post/hunger-games/img-06.png"
+	width="480"
+	height="302"
+	srcset="/Serjaii/post/hunger-games/img-06_hu7143905304999138645.png 480w, /Serjaii/post/hunger-games/img-06_hu15022677197974132287.png 1024w"
+	loading="lazy"
+	
+		alt="Enrutamiento R5"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="158"
+		data-flex-basis="381px"
+	
+></p>
+<h3 id="comprobación-de-conectividad">Comprobación de conectividad
+</h3><ul>
+<li>Ping entre distritos:
+<ul>
+<li>Distrito 1 → Distrito 2</li>
+</ul>
+</li>
+</ul>
+<p><img src="/Serjaii/post/hunger-games/img-17.png"
+	width="403"
+	height="347"
+	srcset="/Serjaii/post/hunger-games/img-17_hu15107771063121307237.png 480w, /Serjaii/post/hunger-games/img-17_hu12386859655648113451.png 1024w"
+	loading="lazy"
+	
+		alt="Ping: Distrito 1 → Distrito 2"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="116"
+		data-flex-basis="278px"
+	
+></p>
+<ul>
+<li>Distrito 1 → Distrito 11</li>
+</ul>
+<p><img src="/Serjaii/post/hunger-games/img-16.png"
+	width="486"
+	height="346"
+	srcset="/Serjaii/post/hunger-games/img-16_hu7090583443778118169.png 480w, /Serjaii/post/hunger-games/img-16_hu14918720803820150056.png 1024w"
+	loading="lazy"
+	
+		alt="Ping: Distrito 1 → Distrito 11"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="140"
+		data-flex-basis="337px"
+	
+></p>
+<ul>
+<li>Distrito 1 → Distrito 12</li>
+</ul>
+<p><img src="/Serjaii/post/hunger-games/img-15.png"
+	width="315"
+	height="241"
+	srcset="/Serjaii/post/hunger-games/img-15_hu8024438561340591640.png 480w, /Serjaii/post/hunger-games/img-15_hu2837154878680118994.png 1024w"
+	loading="lazy"
+	
+		alt="Ping: Distrito 1 → Distrito 12"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="130"
+		data-flex-basis="313px"
+	
+></p>
+<p><img src="/Serjaii/post/hunger-games/img-14.png"
+	width="315"
+	height="241"
+	srcset="/Serjaii/post/hunger-games/img-14_hu865700873399853138.png 480w, /Serjaii/post/hunger-games/img-14_hu16840156673439152179.png 1024w"
+	loading="lazy"
+	
+		alt="Ping: Distrito 2"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="130"
+		data-flex-basis="313px"
+	
+></p>
+<hr>
+<h2 id="ejercicio-2-acl-según-alianzas">Ejercicio 2: ACL según alianzas
+</h2><p>A medida que avanza el juego se van modificando las alianzas.<br>
+El segundo día la situación es la siguiente:</p>
+<blockquote>
+<p>Los superpijos se han peleado con todos y no se comunican con el resto de distritos.</p>
+</blockquote>
+<h3 id="opción-1">Opción 1
+</h3><p>En el router de cada distrito bloquear tráfico destino <code>10.0.1.0</code>.</p>
+<h3 id="opción-2">Opción 2
+</h3><p>Cortar todo el tráfico de R1 (más eficiente).<br>
+Se crea una <strong>ACL estándar</strong> en R1 que deniega todo el tráfico saliente desde la interfaz del switch.</p>
+<p><img src="/Serjaii/post/hunger-games/img-13.png"
+	width="481"
+	height="97"
+	srcset="/Serjaii/post/hunger-games/img-13_hu11223636583335918488.png 480w, /Serjaii/post/hunger-games/img-13_hu10915594664542521048.png 1024w"
+	loading="lazy"
+	
+		alt="ACL estándar en R1"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="495"
+		data-flex-basis="1190px"
+	
+></p>
+<p><strong>Resultados:</strong></p>
+<ul>
+<li>Ping desde fuera → &ldquo;administratively prohibited&rdquo;</li>
+</ul>
+<p><img src="/Serjaii/post/hunger-games/img-42.png"
+	width="563"
+	height="293"
+	srcset="/Serjaii/post/hunger-games/img-42_hu3158004185348466686.png 480w, /Serjaii/post/hunger-games/img-42_hu9204820815808961939.png 1024w"
+	loading="lazy"
+	
+		alt="Ping desde fuera hacia Distrito 1"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="192"
+		data-flex-basis="461px"
+	
+></p>
+<ul>
+<li>Ping desde dentro → timeout (por denegación al retorno)</li>
+</ul>
+<p><img src="/Serjaii/post/hunger-games/img-43.png"
+	width="1566"
+	height="788"
+	srcset="/Serjaii/post/hunger-games/img-43_hu11023568844226183790.png 480w, /Serjaii/post/hunger-games/img-43_hu2064670824411053635.png 1024w"
+	loading="lazy"
+	
+		alt="Ping desde Distrito 1 hacia fuera"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="198"
+		data-flex-basis="476px"
+	
+></p>
+<hr>
+<blockquote>
+<p>Los indigentes se comunican con los pobres, pero los demás distritos no quieren saber nada de ellos.</p>
+</blockquote>
+<p>Se crea una <strong>ACL extendida</strong> en R4 para denegar tráfico hacia los distritos 1 y 2.</p>
+<p><img src="/Serjaii/post/hunger-games/img-12.png"
+	width="250"
+	height="96"
+	srcset="/Serjaii/post/hunger-games/img-12_hu16170418874403680022.png 480w, /Serjaii/post/hunger-games/img-12_hu14766176546457106983.png 1024w"
+	loading="lazy"
+	
+		alt="ACL extendida en R4"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="260"
+		data-flex-basis="625px"
+	
+></p>
+<p>Comprobamos ping desde el distrito 12.</p>
+<p><img src="/Serjaii/post/hunger-games/img-13.png"
+	width="481"
+	height="97"
+	srcset="/Serjaii/post/hunger-games/img-13_hu11223636583335918488.png 480w, /Serjaii/post/hunger-games/img-13_hu10915594664542521048.png 1024w"
+	loading="lazy"
+	
+		alt="Comprobación de ping desde distrito 12"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="495"
+		data-flex-basis="1190px"
+	
+></p>
+<hr>
+<blockquote>
+<p>Los pobres y los pijos se alían y pueden comunicarse solo a través de R5.</p>
+</blockquote>
+<p>Se modifica el enrutamiento de R2 y R4 para enviar tráfico por defecto a R5.<br>
+No se necesita ACL nueva.</p>
+<p><img src="/Serjaii/post/hunger-games/img-27.png"
+	width="473"
+	height="274"
+	srcset="/Serjaii/post/hunger-games/img-27_hu14813531666344274862.png 480w, /Serjaii/post/hunger-games/img-27_hu13370830096144233172.png 1024w"
+	loading="lazy"
+	
+		alt="Modificación de enrutamiento R2 y R4 (1/2)"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="172"
+		data-flex-basis="414px"
+	
+></p>
+<p><img src="/Serjaii/post/hunger-games/img-26.png"
+	width="473"
+	height="280"
+	srcset="/Serjaii/post/hunger-games/img-26_hu3738143958047449761.png 480w, /Serjaii/post/hunger-games/img-26_hu4865205977675389806.png 1024w"
+	loading="lazy"
+	
+		alt="Modificación de enrutamiento R2 y R4 (2/2)"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="168"
+		data-flex-basis="405px"
+	
+></p>
+<hr>
+<h2 id="ejercicio-3-dhcp-para-los-superpijos">Ejercicio 3: DHCP para los superpijos
+</h2><p>Se monta un <strong>servidor DHCP</strong> en el router del distrito 1.<br>
+Las máquinas deben recibir IP automáticamente (cinco primeras del rango), reservando la primera para el router.</p>
+<h3 id="pasos">Pasos:
+</h3><ol>
+<li>Excluir la IP del router.</li>
+</ol>
+<p><img src="/Serjaii/post/hunger-games/img-05.png"
+	width="349"
+	height="34"
+	srcset="/Serjaii/post/hunger-games/img-05_hu5348578603293245738.png 480w, /Serjaii/post/hunger-games/img-05_hu584269622092029145.png 1024w"
+	loading="lazy"
+	
+		alt="Excluir IPs en DHCP"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="1026"
+		data-flex-basis="2463px"
+	
+></p>
+<ol start="2">
+<li>Configurar parámetros del servidor DHCP.</li>
+</ol>
+<p><img src="/Serjaii/post/hunger-games/img-31.png"
+	width="286"
+	height="99"
+	srcset="/Serjaii/post/hunger-games/img-31_hu14663430389201023157.png 480w, /Serjaii/post/hunger-games/img-31_hu12151689965990650364.png 1024w"
+	loading="lazy"
+	
+		alt="Configuración del servidor DHCP"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="288"
+		data-flex-basis="693px"
+	
+></p>
+<ol start="3">
+<li>Comprobar asignación automática de IPs.</li>
+</ol>
+<p><img src="/Serjaii/post/hunger-games/img-11.png"
+	width="384"
+	height="126"
+	srcset="/Serjaii/post/hunger-games/img-11_hu9274621919612424995.png 480w, /Serjaii/post/hunger-games/img-11_hu9161709865873772441.png 1024w"
+	loading="lazy"
+	
+		alt="Comprobación DHCP (1/3)"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="304"
+		data-flex-basis="731px"
+	
+></p>
+<p><img src="/Serjaii/post/hunger-games/img-12.png"
+	width="250"
+	height="96"
+	srcset="/Serjaii/post/hunger-games/img-12_hu16170418874403680022.png 480w, /Serjaii/post/hunger-games/img-12_hu14766176546457106983.png 1024w"
+	loading="lazy"
+	
+		alt="Comprobación DHCP (2/3)"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="260"
+		data-flex-basis="625px"
+	
+></p>
+<p><img src="/Serjaii/post/hunger-games/img-13.png"
+	width="481"
+	height="97"
+	srcset="/Serjaii/post/hunger-games/img-13_hu11223636583335918488.png 480w, /Serjaii/post/hunger-games/img-13_hu10915594664542521048.png 1024w"
+	loading="lazy"
+	
+		alt="Comprobación DHCP (3/3)"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="495"
+		data-flex-basis="1190px"
+	
+></p>
+<hr>
+<h2 id="ejercicio-4-acl-por-relaciones-personales">Ejercicio 4: ACL por relaciones personales
+</h2><blockquote>
+<p>Peeta establece alianza con Clove.<br>
+Katniss deja de hablarse con Rue.<br>
+Katniss y Cato se comunican.</p>
+</blockquote>
+<p>Como el tráfico del distrito 12 estaba bloqueado, se reescribe la <strong>ACL extendida</strong>:</p>
+<p><img src="/Serjaii/post/hunger-games/img-28.png"
+	width="244"
+	height="61"
+	srcset="/Serjaii/post/hunger-games/img-28_hu10842511672455771652.png 480w, /Serjaii/post/hunger-games/img-28_hu15878314548750550455.png 1024w"
+	loading="lazy"
+	
+		alt="Reescribir ACL D12 (1/2)"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="400"
+		data-flex-basis="960px"
+	
+></p>
+<p><img src="/Serjaii/post/hunger-games/img-29.png"
+	width="332"
+	height="34"
+	srcset="/Serjaii/post/hunger-games/img-29_hu5739193434214795880.png 480w, /Serjaii/post/hunger-games/img-29_hu5085030391980549573.png 1024w"
+	loading="lazy"
+	
+		alt="Reescribir ACL D12 (2/2)"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="976"
+		data-flex-basis="2343px"
+	
+></p>
+<ul>
+<li>Katniss ↔ Peeta, Cato, Thresh</li>
+<li>Peeta ↔ Katniss, Clove, Distrito 11</li>
+</ul>
+<p><img src="/Serjaii/post/hunger-games/img-34.png"
+	width="474"
+	height="241"
+	srcset="/Serjaii/post/hunger-games/img-34_hu15547807539334080351.png 480w, /Serjaii/post/hunger-games/img-34_hu11598058462459598681.png 1024w"
+	loading="lazy"
+	
+		alt="ACL Katniss (1/2)"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="196"
+		data-flex-basis="472px"
+	
+></p>
+<p><img src="/Serjaii/post/hunger-games/img-35.png"
+	width="291"
+	height="100"
+	srcset="/Serjaii/post/hunger-games/img-35_hu5019363543339782029.png 480w, /Serjaii/post/hunger-games/img-35_hu15111556370701123488.png 1024w"
+	loading="lazy"
+	
+		alt="ACL Katniss (2/2)"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="291"
+		data-flex-basis="698px"
+	
+></p>
+<p><strong>Comprobaciones:</strong><br>
+Ping en ambos sentidos, con timeout cuando está denegado.</p>
+<p><img src="/Serjaii/post/hunger-games/img-07.png"
+	width="392"
+	height="158"
+	srcset="/Serjaii/post/hunger-games/img-07_hu17130442138122127041.png 480w, /Serjaii/post/hunger-games/img-07_hu15331835387111199843.png 1024w"
+	loading="lazy"
+	
+		alt="Verificación timeout ping"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="248"
+		data-flex-basis="595px"
+	
+></p>
+<blockquote>
+<p>Cato y Thresh se pelean.</p>
+</blockquote>
+<p>Se deniega comunicación con una ACL extendida (puede estar en R2, R3 o R5).</p>
+<p><img src="/Serjaii/post/hunger-games/img-32.png"
+	width="292"
+	height="85"
+	srcset="/Serjaii/post/hunger-games/img-32_hu8556697349095521101.png 480w, /Serjaii/post/hunger-games/img-32_hu14738532263618113087.png 1024w"
+	loading="lazy"
+	
+		alt="ACL Cato-Thresh (1/3)"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="343"
+		data-flex-basis="824px"
+	
+></p>
+<p><img src="/Serjaii/post/hunger-games/img-33.png"
+	width="478"
+	height="265"
+	srcset="/Serjaii/post/hunger-games/img-33_hu18369567441210905019.png 480w, /Serjaii/post/hunger-games/img-33_hu5420721279911233938.png 1024w"
+	loading="lazy"
+	
+		alt="ACL Cato-Thresh (2/3)"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="180"
+		data-flex-basis="432px"
+	
+></p>
+<p><img src="/Serjaii/post/hunger-games/img-41.png"
+	width="184"
+	height="104"
+	srcset="/Serjaii/post/hunger-games/img-41_hu11983486674477734084.png 480w, /Serjaii/post/hunger-games/img-41_hu10560590095387927489.png 1024w"
+	loading="lazy"
+	
+		alt="ACL Cato-Thresh (3/3)"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="176"
+		data-flex-basis="424px"
+	
+></p>
+<hr>
+<h2 id="ejercicio-5-servidor-web-del-distrito-13">Ejercicio 5: Servidor web del distrito 13
+</h2><p>Se monta un <strong>servidor Apache</strong> accesible solo desde los distritos 11 y 12 (puerto 80).</p>
+<h3 id="pasos-1">Pasos:
+</h3><ol>
+<li>Sustituir VPCS por Debian con Apache2.</li>
+</ol>
+<p><img src="/Serjaii/post/hunger-games/img-04.png"
+	width="482"
+	height="181"
+	srcset="/Serjaii/post/hunger-games/img-04_hu11490488781820956365.png 480w, /Serjaii/post/hunger-games/img-04_hu16685659769265568943.png 1024w"
+	loading="lazy"
+	
+		alt="Servidor Debian con Apache"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="266"
+		data-flex-basis="639px"
+	
+></p>
+<ol start="2">
+<li>Asignar IP estática.</li>
+</ol>
+<p><img src="/Serjaii/post/hunger-games/img-03.png"
+	width="434"
+	height="46"
+	srcset="/Serjaii/post/hunger-games/img-03_hu8551535174102286911.png 480w, /Serjaii/post/hunger-games/img-03_hu537611419882086313.png 1024w"
+	loading="lazy"
+	
+		alt="Configurar IP estática (1/2)"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="943"
+		data-flex-basis="2264px"
+	
+></p>
+<p><img src="/Serjaii/post/hunger-games/img-36.png"
+	width="388"
+	height="94"
+	srcset="/Serjaii/post/hunger-games/img-36_hu1664278489555932217.png 480w, /Serjaii/post/hunger-games/img-36_hu2778909980108010061.png 1024w"
+	loading="lazy"
+	
+		alt="Configurar IP estática (2/2)"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="412"
+		data-flex-basis="990px"
+	
+></p>
+<p>Si hacemos ping desde las distintas máquinas veremos que tenemos acceso desde los Distritos 2 y 11.</p>
+<p><img src="/Serjaii/post/hunger-games/img-19.png"
+	width="403"
+	height="347"
+	srcset="/Serjaii/post/hunger-games/img-19_hu17574187881915901318.png 480w, /Serjaii/post/hunger-games/img-19_hu11099140589191653200.png 1024w"
+	loading="lazy"
+	
+		alt="Verificar acceso desde D2 y D11"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="116"
+		data-flex-basis="278px"
+	
+></p>
+<p>En primer lugar modificaremos la ACL de R4 para permitirle el acceso al distrito 12.</p>
+<ol start="3">
+<li>
+<p>Modificar ACLs:</p>
+<ul>
+<li>En <strong>R4</strong> permitir acceso del distrito 12 antes del <code>deny ip any any</code>.</li>
+</ul>
+</li>
+</ol>
+<p><img src="/Serjaii/post/hunger-games/img-20.png"
+	width="403"
+	height="347"
+	srcset="/Serjaii/post/hunger-games/img-20_hu17040683506857545813.png 480w, /Serjaii/post/hunger-games/img-20_hu17715197644128411986.png 1024w"
+	loading="lazy"
+	
+		alt="Modificar ACL R4 (1/2)"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="116"
+		data-flex-basis="278px"
+	
+></p>
+<p><img src="/Serjaii/post/hunger-games/img-07.png"
+	width="392"
+	height="158"
+	srcset="/Serjaii/post/hunger-games/img-07_hu17130442138122127041.png 480w, /Serjaii/post/hunger-games/img-07_hu15331835387111199843.png 1024w"
+	loading="lazy"
+	
+		alt="Modificar ACL R4 (2/2)"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="248"
+		data-flex-basis="595px"
+	
+></p>
+<p>El &lsquo;45&rsquo; colocará la regla justo antes del deny any. - Comprobación:</p>
+<p><img src="/Serjaii/post/hunger-games/img-31.png"
+	width="286"
+	height="99"
+	srcset="/Serjaii/post/hunger-games/img-31_hu14663430389201023157.png 480w, /Serjaii/post/hunger-games/img-31_hu12151689965990650364.png 1024w"
+	loading="lazy"
+	
+		alt="Comprobación R4"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="288"
+		data-flex-basis="693px"
+	
+></p>
+<p>Ahora denegamos el paso al distrito 2 desde R3 de igual forma modificando la ACL ya establecida.</p>
+<ul>
+<li>En <strong>R3</strong> denegar acceso del distrito 2.</li>
+</ul>
+<p><img src="/Serjaii/post/hunger-games/img-32.png"
+	width="292"
+	height="85"
+	srcset="/Serjaii/post/hunger-games/img-32_hu8556697349095521101.png 480w, /Serjaii/post/hunger-games/img-32_hu14738532263618113087.png 1024w"
+	loading="lazy"
+	
+		alt="Denegar D2 en R3 (1/2)"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="343"
+		data-flex-basis="824px"
+	
+></p>
+<p><img src="/Serjaii/post/hunger-games/img-33.png"
+	width="478"
+	height="265"
+	srcset="/Serjaii/post/hunger-games/img-33_hu18369567441210905019.png 480w, /Serjaii/post/hunger-games/img-33_hu5420721279911233938.png 1024w"
+	loading="lazy"
+	
+		alt="Denegar D2 en R3 (2/2)"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="180"
+		data-flex-basis="432px"
+	
+></p>
+<p>Con la ACL aplicada confirmamos acceso desde los distritos 11 y 12.</p>
+<p><img src="/Serjaii/post/hunger-games/img-35.png"
+	width="291"
+	height="100"
+	srcset="/Serjaii/post/hunger-games/img-35_hu5019363543339782029.png 480w, /Serjaii/post/hunger-games/img-35_hu15111556370701123488.png 1024w"
+	loading="lazy"
+	
+		alt="Acceso permitido D11 y D12"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="291"
+		data-flex-basis="698px"
+	
+></p>
+<p>Si intentamos conectarnos desde distrito 2 vemos que la conexión no se realiza:</p>
+<p><img src="/Serjaii/post/hunger-games/img-41.png"
+	width="184"
+	height="104"
+	srcset="/Serjaii/post/hunger-games/img-41_hu11983486674477734084.png 480w, /Serjaii/post/hunger-games/img-41_hu10560590095387927489.png 1024w"
+	loading="lazy"
+	
+		alt="Conexión denegada desde D2"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="176"
+		data-flex-basis="424px"
+	
+></p>
+<hr>
+<p>Ahora que solo tienen acceso los Distritos 11 y 12 cortaremos este a únicamente el puerto 80 mediante una ACL en R5.</p>
+<ul>
+<li>En <strong>R5</strong> permitir solo puerto 80.</li>
+</ul>
+<p><img src="/Serjaii/post/hunger-games/img-30.png"
+	width="344"
+	height="70"
+	srcset="/Serjaii/post/hunger-games/img-30_hu4310881861984172176.png 480w, /Serjaii/post/hunger-games/img-30_hu16156021733158168329.png 1024w"
+	loading="lazy"
+	
+		alt="ACL R5 puerto 80 (1/2)"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="491"
+		data-flex-basis="1179px"
+	
+></p>
+<p><img src="/Serjaii/post/hunger-games/img-11.png"
+	width="384"
+	height="126"
+	srcset="/Serjaii/post/hunger-games/img-11_hu9274621919612424995.png 480w, /Serjaii/post/hunger-games/img-11_hu9161709865873772441.png 1024w"
+	loading="lazy"
+	
+		alt="ACL R5 puerto 80 (2/2)"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="304"
+		data-flex-basis="731px"
+	
+></p>
+<h3 id="comprobaciones">Comprobaciones:
+</h3><ul>
+<li>Ping bloqueado (ICMP ≠ puerto 80).</li>
+</ul>
+<p><img src="/Serjaii/post/hunger-games/img-18.png"
+	width="403"
+	height="347"
+	srcset="/Serjaii/post/hunger-games/img-18_hu10033723249457607475.png 480w, /Serjaii/post/hunger-games/img-18_hu8546843398627684655.png 1024w"
+	loading="lazy"
+	
+		alt="Ping bloqueado por puerto"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="116"
+		data-flex-basis="278px"
+	
+></p>
+<ul>
+<li>Acceso web permitido desde distritos 11 y 12 (navegador Firefox en TinyCore).</li>
+</ul>
+<p>Para comprobar que el servidor web es accesible desde los distritos 11 y 12 vamos a añadir 1 tinycore con firefox al switch de dichos distritos.</p>
+<p><img src="/Serjaii/post/hunger-games/img-22.png"
+	width="245"
+	height="20"
+	srcset="/Serjaii/post/hunger-games/img-22_hu1786166988800629060.png 480w, /Serjaii/post/hunger-games/img-22_hu372381376208441230.png 1024w"
+	loading="lazy"
+	
+		alt="TinyCore con Firefox"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="1225"
+		data-flex-basis="2940px"
+	
+></p>
+<p><img src="/Serjaii/post/hunger-games/img-23.png"
+	width="483"
+	height="262"
+	srcset="/Serjaii/post/hunger-games/img-23_hu12816774911706009671.png 480w, /Serjaii/post/hunger-games/img-23_hu2065166599513482989.png 1024w"
+	loading="lazy"
+	
+		alt="Acceso web permitido"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="184"
+		data-flex-basis="442px"
+	
+></p>
+<p><img src="/Serjaii/post/hunger-games/img-24.png"
+	width="233"
+	height="73"
+	srcset="/Serjaii/post/hunger-games/img-24_hu12819323803533605236.png 480w, /Serjaii/post/hunger-games/img-24_hu10182385019596651725.png 1024w"
+	loading="lazy"
+	
+		alt="Configuración IP en rango"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="319"
+		data-flex-basis="766px"
+	
+></p>
+<hr>
+<p><strong>Fin del documento</strong></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/Serjaii/tags/redes/">Redes</a>
+        
+            <a href="/Serjaii/tags/acl/">ACL</a>
+        
+            <a href="/Serjaii/tags/dhcp/">DHCP</a>
+        
+            <a href="/Serjaii/tags/cisco/">Cisco</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+	const mainArticleElement = document.querySelector(".main-article");
+        renderMathInElement(mainArticleElement, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2023 - 
+        
+        2025 SerjAii
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.31.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/Serjaii/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

@@ -1,0 +1,866 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Redes on SerjAii</title>
+        <link>https://serjaii.github.io/Serjaii/tags/redes/</link>
+        <description>Recent content in Redes on SerjAii</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>es-es</language>
+        <lastBuildDate>Sat, 11 Oct 2025 23:06:17 +0200</lastBuildDate><atom:link href="https://serjaii.github.io/Serjaii/tags/redes/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Hunger Games</title>
+        <link>https://serjaii.github.io/Serjaii/post/hunger-games/</link>
+        <pubDate>Sat, 11 Oct 2025 23:06:17 +0200</pubDate>
+        
+        <guid>https://serjaii.github.io/Serjaii/post/hunger-games/</guid>
+        <description>&lt;img src="https://serjaii.github.io/Serjaii/post/hunger-games/cover.jpg" alt="Featured image of post Hunger Games" /&gt;&lt;h1 id=&#34;hunger-games&#34;&gt;Hunger Games
+&lt;/h1&gt;&lt;h2 id=&#34;introducción&#34;&gt;Introducción
+&lt;/h2&gt;&lt;p&gt;Esta práctica simula un escenario de red complejo basado en la temática de &lt;em&gt;The Hunger Games&lt;/em&gt;. A través de cinco ejercicios progresivos, implementaremos configuraciones de red avanzadas que incluyen enrutamiento estático, listas de control de acceso (ACL), servidor DHCP y un servidor web con restricciones de acceso.&lt;/p&gt;
+&lt;p&gt;Los objetivos principales son:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Configurar el enrutamiento entre múltiples distritos (redes)&lt;/li&gt;
+&lt;li&gt;Implementar políticas de seguridad mediante ACL estándar y extendidas&lt;/li&gt;
+&lt;li&gt;Automatizar la asignación de direcciones IP con DHCP&lt;/li&gt;
+&lt;li&gt;Gestionar accesos a servicios web mediante filtrado por puerto&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Esta práctica permite aplicar conceptos fundamentales de redes en un contexto dinámico donde las alianzas (y por tanto, las políticas de acceso) cambian constantemente.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;contexto-del-escenario&#34;&gt;Contexto del escenario
+&lt;/h2&gt;&lt;p&gt;Vas a participar en &lt;em&gt;The Hunger Games&lt;/em&gt;, un juego de alianzas donde el objetivo es sobrevivir.&lt;br&gt;
+El mundo se divide en distritos, numerados del 1 al 12 del más rico al más pobre.&lt;br&gt;
+También se rumorea la existencia de un distrito 13, pero nadie está muy seguro de su existencia.&lt;br&gt;
+En este momento solo quedan representantes de cuatro distritos.&lt;/p&gt;
+&lt;p&gt;El escenario del juego incluye todos los distritos anteriores y el distrito secreto, al que al principio nadie sabe llegar.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-44.png&#34;
+	width=&#34;1407&#34;
+	height=&#34;692&#34;
+	srcset=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-44_hu15847676720979864025.png 480w, https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-44_hu7559946841574885185.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Topología de red - Hunger Games&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;203&#34;
+		data-flex-basis=&#34;487px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;ejercicio-1-configuración-de-red&#34;&gt;Ejercicio 1: Configuración de red
+&lt;/h2&gt;&lt;p&gt;Realizar la configuración de la red que sea necesaria para que todos los participantes puedan comunicarse entre sí por la ruta más corta posible.&lt;br&gt;
+Documenta el proceso y demuestra su funcionamiento.&lt;/p&gt;
+&lt;p&gt;Para permitir la comunicación de todos los participantes en primer lugar asignaremos direcciones IP tanto a estos como a las interfaces de los routers en el camino.&lt;/p&gt;
+&lt;h3 id=&#34;direcciones-ip&#34;&gt;Direcciones IP
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;Participantes:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Marvel: 10.0.1.2 /24&lt;/li&gt;
+&lt;li&gt;Glimmer: 10.0.1.3 /24&lt;/li&gt;
+&lt;li&gt;Cato: 10.0.2.2 /24&lt;/li&gt;
+&lt;li&gt;Clover: 10.0.2.3 /24&lt;/li&gt;
+&lt;li&gt;Thresh: 10.0.11.2 /24&lt;/li&gt;
+&lt;li&gt;Rue: 10.0.11.3 /24&lt;/li&gt;
+&lt;li&gt;Peeta: 10.0.12.2 /24&lt;/li&gt;
+&lt;li&gt;Katniss: 10.0.12.3 /24&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Routers:&lt;/strong&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;R1 f0/0: 10.0.1.1 /24
+R1 f0/1: 172.23.0.1 /24
+R1 f1/0: 192.168.1.2 /24
+
+R2 f0/0: 10.0.11.1 /24
+R2 f0/1: 172.23.0.2 /24
+R2 f1/0: 172.24.0.1 /24
+R2 f1/1: 192.168.11.2 /24
+
+R3 f0/0: 10.0.2.1 /24
+R3 f0/1: 172.25.0.1 /24
+R3 f1/0: 192.168.2.2 /24
+
+R4 f0/0: 10.0.12.1 /24
+R4 f0/1: 172.24.0.2 /24
+R4 f1/0: 192.168.12.2 /24
+R4 f1/1: 172.25.0.2 /24
+
+R5 f0/0: 192.168.11.1 /24
+R5 f0/1: 192.168.12.1 /24
+R5 f1/0: 192.168.1.1 /24
+R5 f1/1: 192.168.2.1 /24
+R5 f2/0: 10.0.13.1 /24
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;direccionamiento-de-routers&#34;&gt;Direccionamiento de routers
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;R1:&lt;/strong&gt;&lt;br&gt;
+Si el distrito 1 quiere comunicar con el distrito 11 el tráfico irá a R2, en el resto de casos saldrá por la salida por defecto hacia R5.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-40.png&#34;
+	width=&#34;484&#34;
+	height=&#34;164&#34;
+	srcset=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-40_hu8470286134201251966.png 480w, https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-40_hu10327701759661850445.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Enrutamiento R1&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;295&#34;
+		data-flex-basis=&#34;708px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;R2:&lt;/strong&gt;&lt;br&gt;
+Ignoramos el distrito 13, la comunicación para el distrito 1 saldrá hacia R1 y la salida por defecto será hacia R4.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-06.png&#34;
+	width=&#34;480&#34;
+	height=&#34;302&#34;
+	srcset=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-06_hu7143905304999138645.png 480w, https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-06_hu15022677197974132287.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Enrutamiento R2&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;158&#34;
+		data-flex-basis=&#34;381px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;R3:&lt;/strong&gt;&lt;br&gt;
+Salida por defecto hacia R5, excepto mensajes para el distrito 12 que saldrán hasta R4.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-38.png&#34;
+	width=&#34;483&#34;
+	height=&#34;122&#34;
+	srcset=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-38_hu12892183173179351787.png 480w, https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-38_hu12652730655422460887.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Enrutamiento R3&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;395&#34;
+		data-flex-basis=&#34;950px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;R4:&lt;/strong&gt;&lt;br&gt;
+Mensajes al distrito 2 viajarán a R3, el resto hasta R2.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-37.png&#34;
+	width=&#34;482&#34;
+	height=&#34;238&#34;
+	srcset=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-37_hu4752279731969310164.png 480w, https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-37_hu4138887263333754482.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Enrutamiento R4&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;202&#34;
+		data-flex-basis=&#34;486px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;R5:&lt;/strong&gt;&lt;br&gt;
+Deberemos especificar rutas hacia cada distrito, salida por defecto hacia el distrito 13.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-06.png&#34;
+	width=&#34;480&#34;
+	height=&#34;302&#34;
+	srcset=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-06_hu7143905304999138645.png 480w, https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-06_hu15022677197974132287.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Enrutamiento R5&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;158&#34;
+		data-flex-basis=&#34;381px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;comprobación-de-conectividad&#34;&gt;Comprobación de conectividad
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;Ping entre distritos:
+&lt;ul&gt;
+&lt;li&gt;Distrito 1 → Distrito 2&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-17.png&#34;
+	width=&#34;403&#34;
+	height=&#34;347&#34;
+	srcset=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-17_hu15107771063121307237.png 480w, https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-17_hu12386859655648113451.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Ping: Distrito 1 → Distrito 2&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;116&#34;
+		data-flex-basis=&#34;278px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Distrito 1 → Distrito 11&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-16.png&#34;
+	width=&#34;486&#34;
+	height=&#34;346&#34;
+	srcset=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-16_hu7090583443778118169.png 480w, https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-16_hu14918720803820150056.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Ping: Distrito 1 → Distrito 11&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;140&#34;
+		data-flex-basis=&#34;337px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Distrito 1 → Distrito 12&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-15.png&#34;
+	width=&#34;315&#34;
+	height=&#34;241&#34;
+	srcset=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-15_hu8024438561340591640.png 480w, https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-15_hu2837154878680118994.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Ping: Distrito 1 → Distrito 12&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;130&#34;
+		data-flex-basis=&#34;313px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-14.png&#34;
+	width=&#34;315&#34;
+	height=&#34;241&#34;
+	srcset=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-14_hu865700873399853138.png 480w, https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-14_hu16840156673439152179.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Ping: Distrito 2&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;130&#34;
+		data-flex-basis=&#34;313px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;ejercicio-2-acl-según-alianzas&#34;&gt;Ejercicio 2: ACL según alianzas
+&lt;/h2&gt;&lt;p&gt;A medida que avanza el juego se van modificando las alianzas.&lt;br&gt;
+El segundo día la situación es la siguiente:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Los superpijos se han peleado con todos y no se comunican con el resto de distritos.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;opción-1&#34;&gt;Opción 1
+&lt;/h3&gt;&lt;p&gt;En el router de cada distrito bloquear tráfico destino &lt;code&gt;10.0.1.0&lt;/code&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;opción-2&#34;&gt;Opción 2
+&lt;/h3&gt;&lt;p&gt;Cortar todo el tráfico de R1 (más eficiente).&lt;br&gt;
+Se crea una &lt;strong&gt;ACL estándar&lt;/strong&gt; en R1 que deniega todo el tráfico saliente desde la interfaz del switch.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-13.png&#34;
+	width=&#34;481&#34;
+	height=&#34;97&#34;
+	srcset=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-13_hu11223636583335918488.png 480w, https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-13_hu10915594664542521048.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;ACL estándar en R1&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;495&#34;
+		data-flex-basis=&#34;1190px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Resultados:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Ping desde fuera → &amp;ldquo;administratively prohibited&amp;rdquo;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-42.png&#34;
+	width=&#34;563&#34;
+	height=&#34;293&#34;
+	srcset=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-42_hu3158004185348466686.png 480w, https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-42_hu9204820815808961939.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Ping desde fuera hacia Distrito 1&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;192&#34;
+		data-flex-basis=&#34;461px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Ping desde dentro → timeout (por denegación al retorno)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-43.png&#34;
+	width=&#34;1566&#34;
+	height=&#34;788&#34;
+	srcset=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-43_hu11023568844226183790.png 480w, https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-43_hu2064670824411053635.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Ping desde Distrito 1 hacia fuera&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;198&#34;
+		data-flex-basis=&#34;476px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Los indigentes se comunican con los pobres, pero los demás distritos no quieren saber nada de ellos.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Se crea una &lt;strong&gt;ACL extendida&lt;/strong&gt; en R4 para denegar tráfico hacia los distritos 1 y 2.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-12.png&#34;
+	width=&#34;250&#34;
+	height=&#34;96&#34;
+	srcset=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-12_hu16170418874403680022.png 480w, https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-12_hu14766176546457106983.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;ACL extendida en R4&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;260&#34;
+		data-flex-basis=&#34;625px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;Comprobamos ping desde el distrito 12.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-13.png&#34;
+	width=&#34;481&#34;
+	height=&#34;97&#34;
+	srcset=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-13_hu11223636583335918488.png 480w, https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-13_hu10915594664542521048.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Comprobación de ping desde distrito 12&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;495&#34;
+		data-flex-basis=&#34;1190px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Los pobres y los pijos se alían y pueden comunicarse solo a través de R5.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Se modifica el enrutamiento de R2 y R4 para enviar tráfico por defecto a R5.&lt;br&gt;
+No se necesita ACL nueva.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-27.png&#34;
+	width=&#34;473&#34;
+	height=&#34;274&#34;
+	srcset=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-27_hu14813531666344274862.png 480w, https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-27_hu13370830096144233172.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Modificación de enrutamiento R2 y R4 (1/2)&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;172&#34;
+		data-flex-basis=&#34;414px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-26.png&#34;
+	width=&#34;473&#34;
+	height=&#34;280&#34;
+	srcset=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-26_hu3738143958047449761.png 480w, https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-26_hu4865205977675389806.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Modificación de enrutamiento R2 y R4 (2/2)&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;168&#34;
+		data-flex-basis=&#34;405px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;ejercicio-3-dhcp-para-los-superpijos&#34;&gt;Ejercicio 3: DHCP para los superpijos
+&lt;/h2&gt;&lt;p&gt;Se monta un &lt;strong&gt;servidor DHCP&lt;/strong&gt; en el router del distrito 1.&lt;br&gt;
+Las máquinas deben recibir IP automáticamente (cinco primeras del rango), reservando la primera para el router.&lt;/p&gt;
+&lt;h3 id=&#34;pasos&#34;&gt;Pasos:
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;Excluir la IP del router.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-05.png&#34;
+	width=&#34;349&#34;
+	height=&#34;34&#34;
+	srcset=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-05_hu5348578603293245738.png 480w, https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-05_hu584269622092029145.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Excluir IPs en DHCP&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;1026&#34;
+		data-flex-basis=&#34;2463px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;Configurar parámetros del servidor DHCP.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-31.png&#34;
+	width=&#34;286&#34;
+	height=&#34;99&#34;
+	srcset=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-31_hu14663430389201023157.png 480w, https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-31_hu12151689965990650364.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Configuración del servidor DHCP&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;288&#34;
+		data-flex-basis=&#34;693px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;Comprobar asignación automática de IPs.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-11.png&#34;
+	width=&#34;384&#34;
+	height=&#34;126&#34;
+	srcset=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-11_hu9274621919612424995.png 480w, https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-11_hu9161709865873772441.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Comprobación DHCP (1/3)&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;304&#34;
+		data-flex-basis=&#34;731px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-12.png&#34;
+	width=&#34;250&#34;
+	height=&#34;96&#34;
+	srcset=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-12_hu16170418874403680022.png 480w, https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-12_hu14766176546457106983.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Comprobación DHCP (2/3)&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;260&#34;
+		data-flex-basis=&#34;625px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-13.png&#34;
+	width=&#34;481&#34;
+	height=&#34;97&#34;
+	srcset=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-13_hu11223636583335918488.png 480w, https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-13_hu10915594664542521048.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Comprobación DHCP (3/3)&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;495&#34;
+		data-flex-basis=&#34;1190px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;ejercicio-4-acl-por-relaciones-personales&#34;&gt;Ejercicio 4: ACL por relaciones personales
+&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;Peeta establece alianza con Clove.&lt;br&gt;
+Katniss deja de hablarse con Rue.&lt;br&gt;
+Katniss y Cato se comunican.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Como el tráfico del distrito 12 estaba bloqueado, se reescribe la &lt;strong&gt;ACL extendida&lt;/strong&gt;:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-28.png&#34;
+	width=&#34;244&#34;
+	height=&#34;61&#34;
+	srcset=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-28_hu10842511672455771652.png 480w, https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-28_hu15878314548750550455.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Reescribir ACL D12 (1/2)&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;400&#34;
+		data-flex-basis=&#34;960px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-29.png&#34;
+	width=&#34;332&#34;
+	height=&#34;34&#34;
+	srcset=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-29_hu5739193434214795880.png 480w, https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-29_hu5085030391980549573.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Reescribir ACL D12 (2/2)&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;976&#34;
+		data-flex-basis=&#34;2343px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Katniss ↔ Peeta, Cato, Thresh&lt;/li&gt;
+&lt;li&gt;Peeta ↔ Katniss, Clove, Distrito 11&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-34.png&#34;
+	width=&#34;474&#34;
+	height=&#34;241&#34;
+	srcset=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-34_hu15547807539334080351.png 480w, https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-34_hu11598058462459598681.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;ACL Katniss (1/2)&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;196&#34;
+		data-flex-basis=&#34;472px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-35.png&#34;
+	width=&#34;291&#34;
+	height=&#34;100&#34;
+	srcset=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-35_hu5019363543339782029.png 480w, https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-35_hu15111556370701123488.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;ACL Katniss (2/2)&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;291&#34;
+		data-flex-basis=&#34;698px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Comprobaciones:&lt;/strong&gt;&lt;br&gt;
+Ping en ambos sentidos, con timeout cuando está denegado.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-07.png&#34;
+	width=&#34;392&#34;
+	height=&#34;158&#34;
+	srcset=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-07_hu17130442138122127041.png 480w, https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-07_hu15331835387111199843.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Verificación timeout ping&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;248&#34;
+		data-flex-basis=&#34;595px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Cato y Thresh se pelean.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Se deniega comunicación con una ACL extendida (puede estar en R2, R3 o R5).&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-32.png&#34;
+	width=&#34;292&#34;
+	height=&#34;85&#34;
+	srcset=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-32_hu8556697349095521101.png 480w, https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-32_hu14738532263618113087.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;ACL Cato-Thresh (1/3)&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;343&#34;
+		data-flex-basis=&#34;824px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-33.png&#34;
+	width=&#34;478&#34;
+	height=&#34;265&#34;
+	srcset=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-33_hu18369567441210905019.png 480w, https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-33_hu5420721279911233938.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;ACL Cato-Thresh (2/3)&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;180&#34;
+		data-flex-basis=&#34;432px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-41.png&#34;
+	width=&#34;184&#34;
+	height=&#34;104&#34;
+	srcset=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-41_hu11983486674477734084.png 480w, https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-41_hu10560590095387927489.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;ACL Cato-Thresh (3/3)&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;176&#34;
+		data-flex-basis=&#34;424px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;ejercicio-5-servidor-web-del-distrito-13&#34;&gt;Ejercicio 5: Servidor web del distrito 13
+&lt;/h2&gt;&lt;p&gt;Se monta un &lt;strong&gt;servidor Apache&lt;/strong&gt; accesible solo desde los distritos 11 y 12 (puerto 80).&lt;/p&gt;
+&lt;h3 id=&#34;pasos-1&#34;&gt;Pasos:
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;Sustituir VPCS por Debian con Apache2.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-04.png&#34;
+	width=&#34;482&#34;
+	height=&#34;181&#34;
+	srcset=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-04_hu11490488781820956365.png 480w, https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-04_hu16685659769265568943.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Servidor Debian con Apache&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;266&#34;
+		data-flex-basis=&#34;639px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;Asignar IP estática.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-03.png&#34;
+	width=&#34;434&#34;
+	height=&#34;46&#34;
+	srcset=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-03_hu8551535174102286911.png 480w, https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-03_hu537611419882086313.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Configurar IP estática (1/2)&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;943&#34;
+		data-flex-basis=&#34;2264px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-36.png&#34;
+	width=&#34;388&#34;
+	height=&#34;94&#34;
+	srcset=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-36_hu1664278489555932217.png 480w, https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-36_hu2778909980108010061.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Configurar IP estática (2/2)&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;412&#34;
+		data-flex-basis=&#34;990px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;Si hacemos ping desde las distintas máquinas veremos que tenemos acceso desde los Distritos 2 y 11.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-19.png&#34;
+	width=&#34;403&#34;
+	height=&#34;347&#34;
+	srcset=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-19_hu17574187881915901318.png 480w, https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-19_hu11099140589191653200.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Verificar acceso desde D2 y D11&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;116&#34;
+		data-flex-basis=&#34;278px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;En primer lugar modificaremos la ACL de R4 para permitirle el acceso al distrito 12.&lt;/p&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;
+&lt;p&gt;Modificar ACLs:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;En &lt;strong&gt;R4&lt;/strong&gt; permitir acceso del distrito 12 antes del &lt;code&gt;deny ip any any&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-20.png&#34;
+	width=&#34;403&#34;
+	height=&#34;347&#34;
+	srcset=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-20_hu17040683506857545813.png 480w, https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-20_hu17715197644128411986.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Modificar ACL R4 (1/2)&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;116&#34;
+		data-flex-basis=&#34;278px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-07.png&#34;
+	width=&#34;392&#34;
+	height=&#34;158&#34;
+	srcset=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-07_hu17130442138122127041.png 480w, https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-07_hu15331835387111199843.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Modificar ACL R4 (2/2)&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;248&#34;
+		data-flex-basis=&#34;595px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;El &amp;lsquo;45&amp;rsquo; colocará la regla justo antes del deny any. - Comprobación:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-31.png&#34;
+	width=&#34;286&#34;
+	height=&#34;99&#34;
+	srcset=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-31_hu14663430389201023157.png 480w, https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-31_hu12151689965990650364.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Comprobación R4&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;288&#34;
+		data-flex-basis=&#34;693px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;Ahora denegamos el paso al distrito 2 desde R3 de igual forma modificando la ACL ya establecida.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;En &lt;strong&gt;R3&lt;/strong&gt; denegar acceso del distrito 2.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-32.png&#34;
+	width=&#34;292&#34;
+	height=&#34;85&#34;
+	srcset=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-32_hu8556697349095521101.png 480w, https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-32_hu14738532263618113087.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Denegar D2 en R3 (1/2)&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;343&#34;
+		data-flex-basis=&#34;824px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-33.png&#34;
+	width=&#34;478&#34;
+	height=&#34;265&#34;
+	srcset=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-33_hu18369567441210905019.png 480w, https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-33_hu5420721279911233938.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Denegar D2 en R3 (2/2)&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;180&#34;
+		data-flex-basis=&#34;432px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;Con la ACL aplicada confirmamos acceso desde los distritos 11 y 12.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-35.png&#34;
+	width=&#34;291&#34;
+	height=&#34;100&#34;
+	srcset=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-35_hu5019363543339782029.png 480w, https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-35_hu15111556370701123488.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Acceso permitido D11 y D12&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;291&#34;
+		data-flex-basis=&#34;698px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;Si intentamos conectarnos desde distrito 2 vemos que la conexión no se realiza:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-41.png&#34;
+	width=&#34;184&#34;
+	height=&#34;104&#34;
+	srcset=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-41_hu11983486674477734084.png 480w, https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-41_hu10560590095387927489.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Conexión denegada desde D2&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;176&#34;
+		data-flex-basis=&#34;424px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Ahora que solo tienen acceso los Distritos 11 y 12 cortaremos este a únicamente el puerto 80 mediante una ACL en R5.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;En &lt;strong&gt;R5&lt;/strong&gt; permitir solo puerto 80.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-30.png&#34;
+	width=&#34;344&#34;
+	height=&#34;70&#34;
+	srcset=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-30_hu4310881861984172176.png 480w, https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-30_hu16156021733158168329.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;ACL R5 puerto 80 (1/2)&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;491&#34;
+		data-flex-basis=&#34;1179px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-11.png&#34;
+	width=&#34;384&#34;
+	height=&#34;126&#34;
+	srcset=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-11_hu9274621919612424995.png 480w, https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-11_hu9161709865873772441.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;ACL R5 puerto 80 (2/2)&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;304&#34;
+		data-flex-basis=&#34;731px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;comprobaciones&#34;&gt;Comprobaciones:
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;Ping bloqueado (ICMP ≠ puerto 80).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-18.png&#34;
+	width=&#34;403&#34;
+	height=&#34;347&#34;
+	srcset=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-18_hu10033723249457607475.png 480w, https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-18_hu8546843398627684655.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Ping bloqueado por puerto&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;116&#34;
+		data-flex-basis=&#34;278px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Acceso web permitido desde distritos 11 y 12 (navegador Firefox en TinyCore).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Para comprobar que el servidor web es accesible desde los distritos 11 y 12 vamos a añadir 1 tinycore con firefox al switch de dichos distritos.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-22.png&#34;
+	width=&#34;245&#34;
+	height=&#34;20&#34;
+	srcset=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-22_hu1786166988800629060.png 480w, https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-22_hu372381376208441230.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;TinyCore con Firefox&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;1225&#34;
+		data-flex-basis=&#34;2940px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-23.png&#34;
+	width=&#34;483&#34;
+	height=&#34;262&#34;
+	srcset=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-23_hu12816774911706009671.png 480w, https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-23_hu2065166599513482989.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Acceso web permitido&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;184&#34;
+		data-flex-basis=&#34;442px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-24.png&#34;
+	width=&#34;233&#34;
+	height=&#34;73&#34;
+	srcset=&#34;https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-24_hu12819323803533605236.png 480w, https://serjaii.github.io/Serjaii/Serjaii/post/hunger-games/img-24_hu10182385019596651725.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Configuración IP en rango&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;319&#34;
+		data-flex-basis=&#34;766px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;Fin del documento&lt;/strong&gt;&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>
