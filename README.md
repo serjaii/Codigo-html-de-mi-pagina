@@ -57,13 +57,13 @@ Actualmente estoy desarrollando una **web personal** para compartir mis proyecto
 
 ## 🚗 Otros datos
 - Carnet de conducir  
-- Disponibilidad absoluta  
+- Coche propio
 
 ---
 
 ## 📫 Contacto
 📧 **Email:** sjnezsrez@gmail.com  
 🔗 **LinkedIn:** [www.linkedin.com/in/serjaii](https://www.linkedin.com/in/serjaii)  
-📱 **Teléfono:** +34 674 635 056  
+📱 **WhatsApp:** +34 674 635 056  
 
 ---
